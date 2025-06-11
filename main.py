@@ -21,12 +21,12 @@ def main(): # Controla el flujo del programa
             marca = input("Marca: ")
             modelo = input("Modelo: ")
             anio = input("Año:")
-            vehiculo = Vehiculo(marca,modelo,anio)
+            vehiculo = Vehiculo(marca, modelo, int(anio))
             bd.insertar_vehiculo(vehiculo)
             print("Vehiculo Registrado.")
 
         elif opcion == "2":
-            vehiculos = bd.listar_vehiculos
+            vehiculos = bd.listar_vehiculos()
             for v in vehiculos:
                 print(f"ID: {v[0]}, Marca: {v[1]}, Modelo: {v[2]}, Año: {v[3]}")
 
@@ -35,7 +35,7 @@ def main(): # Controla el flujo del programa
             id_v = int(input("ID Vehiculo: "))
             v = bd.buscar_vehiculos(id_v)
             if v:
-                print("ID: {v[0]}, Marca: {v[1]}, Modelo: {v[2]}, Año: {v[3]}")
+                print(f"ID: {v[0]}, Marca: {v[1]}, Modelo: {v[2]}, Año: {v[3]}")
             else:
                 print("Vehiculo no encontrado.")
 
@@ -46,6 +46,7 @@ def main(): # Controla el flujo del programa
 
         elif opcion == "5":
             print("Saliendo del programa.")
+            bd.cerrar_conexion()
             break
 
         else:
