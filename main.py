@@ -7,7 +7,8 @@ def mostrar_menu(): # Menu del programa
     print("2. Listar Vehiculo")
     print("3. Buscar Vehiculo")
     print("4. Eliminar Vehiculo")
-    print("5. Salir")
+    print("5. Actualizar Vehiculo")
+    print("6. Salir")
 
 def main(): # Controla el flujo del programa
     bd = BaseDatos() # Crea una instancia de base de datos, para abrir una conexion con la BDD
@@ -45,6 +46,14 @@ def main(): # Controla el flujo del programa
             print("Vehiculo Eliminado.")
 
         elif opcion == "5":
+            id_v = int(input("ID del Vehiculo a Actualizar: "))
+            marca = input("Nueva Marca: ")
+            modelo = input("Nuevo Modelo: ")
+            anio = input("Nuevo Año: ")
+            bd.actualizar_vehiculo(id_v, marca, modelo, int(anio))
+            print("Vehiculo Actualizado.")
+
+        elif opcion == "6":
             print("Saliendo del programa.")
             bd.cerrar_conexion()
             break
