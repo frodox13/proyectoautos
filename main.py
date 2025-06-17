@@ -8,7 +8,8 @@ def mostrar_menu(): # Menu del programa
     print("3. Buscar Vehiculo")
     print("4. Eliminar Vehiculo")
     print("5. Actualizar Vehiculo")
-    print("6. Salir")
+    print("6. Exportar a CSV")
+    print("7. Salir")
 
 def main(): # Controla el flujo del programa
     bd = BaseDatos() # Crea una instancia de base de datos, para abrir una conexion con la BDD
@@ -54,6 +55,11 @@ def main(): # Controla el flujo del programa
             print("Vehiculo Actualizado.")
 
         elif opcion == "6":
+            nombre_archivo = input("Ingrese el nombre del archivo CSV (ejemplo: vehiculos.csv): ")
+            bd.exportar_csv(nombre_archivo)
+            print(f"Datos exportados a {nombre_archivo}")
+
+        elif opcion == "7":
             print("Saliendo del programa.")
             bd.cerrar_conexion()
             break

@@ -1,4 +1,5 @@
 import sqlite3 # Libreria importada
+import csv
 
 class BaseDatos: # Clase
     def __init__(self, nombre_bd="vehiculos.db"): # Clase definida con constructor 'init'. Contiene la base de datos
@@ -46,6 +47,13 @@ class BaseDatos: # Clase
         cursor = self.conexion.cursor()
         cursor.execute("UPDATE vehiculos SET marca = ?, modelo = ?, anio = ? WHERE id = ?", (nueva_marca, nuevo_modelo, nuevo_anio, id_vehiculo))
         self.conexion.commit()
+
+    def exportar_csv(self, nombre_archivo): # Metodo exportar csv
+        vehiculos = self.listar_vehiculos()
+        with open(nombre_archivo, 'w', newline='') as archivo_csv:
+            escritor_csv = csv.writer(archivo_csv)
+            escritor_csv.writerow(['ID', 'Marca', 'Modelo', 'Año'])
+            escritor_csv.writerows(vehiculos)
 
     def cerrar_conexion(self): # Metodo cerrar conexion
         if self.conexion:
